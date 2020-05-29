@@ -19,7 +19,7 @@ app.set('view engine', '.hbs');
 app.get('/', async (req, res) => { // localhost:3000/ home page
     res.render('home');
 });
-app.get('/APOD', async (req, res) => {
+app.get('/apod', async (req, res) => {
     let rawSrc = await nasaApod();
     console.log(rawSrc);
     console.log("^^^src log");
@@ -27,7 +27,7 @@ app.get('/APOD', async (req, res) => {
     let descrip = await rawSrc.explanation;
     res.render('apod', { src, descrip })
 })
-app.get('/POKE', async (req, res) => {
+app.get('/poke', async (req, res) => {
     let rawData = await randPoke();
     let poke = await rawData.forms[0].name;
     let pokePic = await rawData.sprites.front_default;
@@ -35,7 +35,7 @@ app.get('/POKE', async (req, res) => {
     console.log(pokePic);
     res.render('poke', { poke, pokePic })
 })
-app.get('/STARWARS', async (req, res) => {
+app.get('/starwars', async (req, res) => {
     let rawChar = await randStar();
     let name = await rawChar.name;
     res.render('swapi', { name })

@@ -3,3 +3,11 @@
     align-content: center;
     text-align: center;
 }
+#navbar {
+    display: flex;
+    justify-content: space-evenly;
+}
+.navItem {
+    flex-direction: row;
+    justify-content: space-evenly;
+}
