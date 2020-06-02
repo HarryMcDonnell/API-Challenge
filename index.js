@@ -1,14 +1,18 @@
 const express = require ('express'); //npm i express-handlebars
 const hbs = require ('express-handlebars');
 const path = require('path');
+const bodyParser = require('body-parser'); //npm i body-parser
 const app = express();
 
 const nasaApod = require('./lib/nasa');
 const randPoke = require('./lib/pokemon');
-const randStar = require('./lib/swapi');
+const swAPI = require('./lib/swapi');
 
 require ('dotenv').config // npm i dotenv
 
+app.use(bodyParser.urlencoded({extended: false}));
+//ignore data types and make everything a string
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.engine('.hbs', hbs({
     defaultLayout: 'layout',
@@ -19,7 +23,8 @@ app.set('view engine', '.hbs');
 app.get('/', async (req, res) => { // localhost:3000/ home page
     res.render('home');
 });
-app.get('/apod', async (req, res) => {
+app.get('/apod', async (req, res) => { //input type=date to pick which apod 
+    let date = req.body.date;
     let rawSrc = await nasaApod();
     console.log(rawSrc);
     console.log("^^^src log");
@@ -36,9 +41,22 @@ app.get('/poke', async (req, res) => {
     res.render('poke', { poke, pokePic })
 })
 app.get('/starwars', async (req, res) => {
-    let rawChar = await randStar();
-    let name = await rawChar.name;
-    res.render('swapi', { name })
+    let rawChar = await swAPI.getSW();
+    // let name = await rawChar.name;
+    // let height = await rawChar.height;
+    // let dob = await rawChar.birth_year;
+    let response = {
+		name: rawChar.name,
+		height: rawChar.height,
+		DOB: rawChar.birth_year
+	}
+    res.render('swapi', { response })
+})
+app.post('/starwars', async(req, res) => {
+    let number = req.body.number;
+    console.log(number);
+    let response = await swAPI.chooseChar(number);
+    res.render('swapi', { response });
 })
 
 app.listen(3000,() => { // localhost:3000 but can be any port between 3000-8000 i think

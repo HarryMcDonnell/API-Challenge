@@ -6,8 +6,13 @@
 #navbar {
     display: flex;
     justify-content: space-evenly;
+    flex-direction: row;
 }
 .navItem {
-    flex-direction: row;
     justify-content: space-evenly;
+}
+#navbar a {
+    text-decoration: none;
+    font-size: 15pt;
+    color: black;
 }
