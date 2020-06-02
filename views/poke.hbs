@@ -1,4 +1,13 @@
 <div id="poke">
     <h1> Your random Pokemon is: {{poke}}</h1>
     <img src={{pokePic}} width="192" height="192">
+    <form action="/poke" method="post">
+        <label for="refresh">Click for new random Pokemon</label>
+        <input type="submit" value="Reset" name="refresh"> 
+    </form>
+    <script>
+        function refreshPage(){
+            window.location.reload();
+        }    
+    </script>
 </div>

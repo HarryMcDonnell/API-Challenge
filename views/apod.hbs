@@ -1,5 +1,10 @@
 <div id="apod">
     <h1>Below is todays picture from NASA.</h1>
+    <form action="/apod" method="post">
+        <label for="date">Select date to see previous "Picture of the day".</label>
+	    <input type="date" name="pickDate">
+	    <input type="submit" value="submit">
+    </form>
     <img src = {{src}} width="1024" height="683">
     <p>{{descrip}}</p>
 </div>

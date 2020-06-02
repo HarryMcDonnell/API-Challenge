@@ -25,7 +25,7 @@ app.get('/', async (req, res) => { // localhost:3000/ home page
 });
 app.get('/apod', async (req, res) => { //input type=date to pick which apod 
     let date = req.body.date;
-    let rawSrc = await nasaApod();
+    let rawSrc = await nasaApod.getAPOD();
     console.log(rawSrc);
     console.log("^^^src log");
     let src = await rawSrc.hdurl;
@@ -58,7 +58,14 @@ app.post('/starwars', async(req, res) => {
     let response = await swAPI.chooseChar(number);
     res.render('swapi', { response });
 })
-
+app.post('/apod', async(req, res) => {
+    let date = req.body.pickDate;
+    console.log(date);
+    let rawSrc = await nasaApod.dateAPOD(date);
+    let src = await rawSrc.hdurl;
+    let descrip = await rawSrc.explanation;
+    res.render('apod', { src, descrip });
+})
 app.listen(3000,() => { // localhost:3000 but can be any port between 3000-8000 i think
     console.log("listening on port 3000"); 
 })

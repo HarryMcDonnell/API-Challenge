@@ -7,19 +7,12 @@
     <title>API Challenge</title>
 </head>
 <body id='body'>
-    <div>
-        <ul id="navbar">
-            <p class="navItem">
-                <a href="/apod"> NASA Pic a day</a>
-            </p>
-            <p class="navItem">
-                <a href="/poke"> Random Pokemon</a>
-            </p>
-            <p class="navItem">
-                <a href="/starwars"> Random StarWars Chracter</a>
-            </p>
-        </ul>
-    </div>
+    {{> nav}}
     {{{body}}}
+    <div id="footer">
+        <p>
+            <a target="_blank" rel="noopener noreferrer" href="https://github.com/HarryMcDonnell/E-Portfolio">Click here to check out my GitHub.</a>
+        </p>
+    </div>
 </body>
 </html>
